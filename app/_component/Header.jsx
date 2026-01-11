@@ -26,7 +26,7 @@ export default function Header() {
                 <Image src={"/assets/images/logo.png"} alt="logo" width={100} height={100} />
                 <ul className='md:flex items-center gap-8 hidden'>
                     {Menu.map((item, index) => (
-                        <Link href={item.path}>
+                        <Link  key={index} href={item.path}>
                         <li className='hover:text-lime-600 cursor-pointer hover:scale-105 transition-all'>{item.name}</li>
                         </Link>
                     ))}
