@@ -28,8 +28,11 @@ export default function CategorySearch() {
             </div>
 
             {categoriesList.map((cat,index)=>(
-                <div>
-                    <Image key={index} src={`http://localhost:1337${cat?.icon[0]?.url}`}   width={70} height={70} alt={cat.name}/>
+                <div  key={cat.id}>
+                    <Image src={`http://localhost:1337${cat?.icon[0]?.url}`} 
+                      width={70} height={70} alt={cat.name}
+                      unoptimized
+                      />
                 </div>
             ))}
         </div>
