@@ -21,9 +21,12 @@ export default function RootLayout({ children }) {
       <body
         className={`${outfit.className}  antialiased`}
       >
-        <div className="md:px-20">
+        <div >
           <Header />
-          {children}
+          {/* <div className="md:px-10"> */}
+            {children}
+          {/* </div> */}
+          
           <Footer />
 
         </div>
