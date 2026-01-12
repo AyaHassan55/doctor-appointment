@@ -5,9 +5,10 @@ const axiosGlobal = axios.create({
   
   })
   const getCategory =()=>axiosGlobal.get('/categories?populate=*');
+  const getDoctors =()=>axiosGlobal.get('/doctors?populate=*');
 
-const Api = {
+export default  {
   getCategory,
+  getDoctors,
 };
 
-export default Api;
