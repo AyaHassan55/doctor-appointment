@@ -6,9 +6,12 @@ const axiosGlobal = axios.create({
   })
   const getCategory =()=>axiosGlobal.get('/categories?populate=*');
   const getDoctors =()=>axiosGlobal.get('/doctors?populate=*');
+  const getDoctorsByCategory =(category)=>axiosGlobal
+         .get('/doctors?populate=*&filters[categories][name][$contains]='+category);
 
 export default  {
   getCategory,
   getDoctors,
+  getDoctorsByCategory
 };
 

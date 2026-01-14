@@ -1,11 +1,14 @@
 import React from 'react'
+import CategoryList from './_components/CategoryList'
 
 export default function layout({children}) {
   return (
     <div className='grid grid-cols-4'>
         
         {/* categories */}
-        <div></div>
+        <div className='hidden md:block'>
+            <CategoryList />
+        </div>
 
 
         {/* children */}

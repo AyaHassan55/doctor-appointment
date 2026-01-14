@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input'
 import React, { useEffect, useState } from 'react'
 import Api from '../_utils/Api';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function CategorySearch() {
     const [categoriesList, setCategoriesList] =useState([]);
@@ -28,14 +29,14 @@ export default function CategorySearch() {
             </div>
             <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 mt-8'>
                 {categoriesList.map((cat, index) => (
-                    <div key={cat.id} className='flex flex-col items-center text-center m-2 bg-lime-200 rounded-lg p-5 hover:scale-110 transition-all duration-300 cursor-pointer'>
+                    <Link href={`/search/${cat?.name}`} key={cat.id} className='flex flex-col items-center text-center m-2 bg-lime-200 rounded-lg p-5 hover:scale-110 transition-all duration-300 cursor-pointer'>
                         <Image src={`http://localhost:1337${cat?.icon[0]?.url}`}
                             width={50} height={50} alt={cat.name}
                             unoptimized
                         />
                         <p className="mt-2 font-medium">{cat?.name}</p>
 
-                    </div>
+                    </Link>
 
                 ))}
             </div>
