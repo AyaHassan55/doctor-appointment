@@ -1,14 +1,14 @@
 import React from 'react'
 import Image from 'next/image';
-export default function DoctorList({ doctors }) {
+export default function DoctorList({ doctors ,heading="Popular Doctors"}) {
     return (
         <div>
             <h2 className='font-bold text-xl text-lime-600'>
-                Popular Doctors
+                {heading}
             </h2>
             <div className='grid grid-cols-1 md:grid-cols-3'>
                 {
-                    doctors.map((doctor, index) => {
+                    doctors?.map((doctor, index) => {
                         const imgURL = doctor?.image?.[0].url;
                         return (
                             <div key={index} className='border-1px rounded-lg p-3 m-3'>
