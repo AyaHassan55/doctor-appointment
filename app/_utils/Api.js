@@ -9,9 +9,13 @@ const axiosGlobal = axios.create({
   const getDoctorsByCategory =(category)=>axiosGlobal
          .get('/doctors?populate=*&filters[Category][name][$contains]='+category);
 
+//  const getDoctorByID =(documentId)=>axiosGlobal.get(`/doctors/${documentId}?populate=*`);        
+ const getDoctorByID =(documentId)=>axiosGlobal.get('/doctors/'+documentId+'?populate=*');        
+
 export default  {
   getCategory,
   getDoctors,
-  getDoctorsByCategory
+  getDoctorsByCategory,
+  getDoctorByID
 };
 
