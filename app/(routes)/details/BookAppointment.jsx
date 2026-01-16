@@ -38,7 +38,7 @@ export default function BookAppointment() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="mt-3 rounded-full bg-lime-600 hover:bg-lime-700">
+        <Button className="mt-3 rounded-full cursor-pointer ">
           Book Appointment
         </Button>
       </DialogTrigger>
@@ -53,18 +53,18 @@ export default function BookAppointment() {
         <div className="grid grid-cols-2 gap-6 mt-4">
 
           {/* Calendar */}
-          <div className="flex justify-center">
+          <div className=" ">
             <Calendar
               mode="single"
               selected={date}
               onSelect={setDate}
-              className="rounded-lg border"
+              className="rounded-lg border p-2"
             />
           </div>
 
           {/* Time slots */}
-          <div>
-            <h3 className="font-semibold mb-3">Available Time</h3>
+          <div className=''>
+            <h3 className="font-semibold mb-3 text-center">Available Time</h3>
 
             <div className="grid grid-cols-3 gap-3 max-h-[300px] overflow-y-auto pr-2">
               {timeSlots.map((time, index) => (
@@ -74,7 +74,7 @@ export default function BookAppointment() {
                   className={cn(
                     "border rounded-full py-2 text-sm transition",
                     selectedTime === time
-                      ? "bg-lime-600 text-white border-lime-600"
+                      ? "bg-lime-600 text-blak border-lime-600"
                       : "hover:border-lime-600 hover:text-lime-600"
                   )}
                 >
@@ -89,7 +89,7 @@ export default function BookAppointment() {
         <div className="flex justify-end mt-6">
           <Button
             disabled={!date || !selectedTime}
-            className="bg-lime-600 hover:bg-lime-700 text-black"
+            className=" text-black cursor-pointer"
           >
             Confirm Appointment
           </Button>
