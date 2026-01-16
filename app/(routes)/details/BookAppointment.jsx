@@ -1,0 +1,100 @@
+'use client'
+
+import React, { useEffect, useState } from 'react'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Button } from '@/components/ui/button'
+import { Calendar } from "@/components/ui/calendar"
+import { cn } from '@/lib/utils'
+
+export default function BookAppointment() {
+  const [date, setDate] = useState(new Date())
+  const [timeSlots, setTimeSlots] = useState([])
+  const [selectedTime, setSelectedTime] = useState(null)
+
+  useEffect(() => {
+    generateTimeSlots()
+  }, [])
+
+  const generateTimeSlots = () => {
+    const timeList = []
+
+    for (let i = 10; i <= 12; i++) {
+      timeList.push(`${i}:00 AM`, `${i}:30 AM`)
+    }
+
+    for (let i = 1; i <= 5; i++) {
+      timeList.push(`${i}:00 PM`, `${i}:30 PM`)
+    }
+
+    setTimeSlots(timeList)
+  }
+
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button className="mt-3 rounded-full bg-lime-600 hover:bg-lime-700">
+          Book Appointment
+        </Button>
+      </DialogTrigger>
+
+      <DialogContent className="max-w-3xl p-6">
+        <DialogHeader>
+          <DialogTitle className="text-xl font-bold">
+            Book Appointment
+          </DialogTitle>
+        </DialogHeader>
+
+        <div className="grid grid-cols-2 gap-6 mt-4">
+
+          {/* Calendar */}
+          <div className="flex justify-center">
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+              className="rounded-lg border"
+            />
+          </div>
+
+          {/* Time slots */}
+          <div>
+            <h3 className="font-semibold mb-3">Available Time</h3>
+
+            <div className="grid grid-cols-3 gap-3 max-h-[300px] overflow-y-auto pr-2">
+              {timeSlots.map((time, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSelectedTime(time)}
+                  className={cn(
+                    "border rounded-full py-2 text-sm transition",
+                    selectedTime === time
+                      ? "bg-lime-600 text-white border-lime-600"
+                      : "hover:border-lime-600 hover:text-lime-600"
+                  )}
+                >
+                  {time}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="flex justify-end mt-6">
+          <Button
+            disabled={!date || !selectedTime}
+            className="bg-lime-600 hover:bg-lime-700 text-black"
+          >
+            Confirm Appointment
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
+  )
+}
