@@ -34,7 +34,10 @@ export default function BookAppointment() {
 
     setTimeSlots(timeList)
   }
-
+  const pastDay = (date) => {
+    const today = new Date()
+    return date < today
+  } 
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -58,7 +61,8 @@ export default function BookAppointment() {
               mode="single"
               selected={date}
               onSelect={setDate}
-              className="rounded-lg border p-2"
+              className="rounded-lg border p-2 cursor-pointer hover:background-black"
+              disabled={pastDay}
             />
           </div>
 
@@ -88,7 +92,7 @@ export default function BookAppointment() {
         {/* Footer */}
         <div className="flex justify-end mt-6">
           <Button
-            disabled={!date || !selectedTime}
+            disabled={!(date && selectedTime)}
             className=" text-black cursor-pointer"
           >
             Confirm Appointment
