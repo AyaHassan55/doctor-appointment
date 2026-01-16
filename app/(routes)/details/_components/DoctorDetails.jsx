@@ -46,7 +46,7 @@ export default function doctorDetailsDetails({ doctorDetails }) {
                     <h2 className='bg-lime-200 text-lime-800 rounded-full text-[10px] p-2'>{doctorDetails?.Category?.name}</h2>
 
                     
-                    <BookAppointment />
+                    <BookAppointment  doctorDetails={doctorDetails}/>
 
                     <div>
 

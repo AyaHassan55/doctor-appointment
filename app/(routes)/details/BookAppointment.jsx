@@ -11,11 +11,35 @@ import {
 import { Button } from '@/components/ui/button'
 import { Calendar } from "@/components/ui/calendar"
 import { cn } from '@/lib/utils'
-
-export default function BookAppointment() {
+import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs'
+import Api from '@/app/_utils/Api'
+import { toast } from "sonner"
+export default function BookAppointment({doctorDetails}) {
   const [date, setDate] = useState(new Date())
   const [timeSlots, setTimeSlots] = useState([])
-  const [selectedTime, setSelectedTime] = useState(null)
+  const [selectedTime, setSelectedTime] = useState(null);
+  
+//  1- book appointment
+  const {user} = useKindeBrowserClient();
+//  2- book appointment
+const bookingAppointment = () => {
+    const data = {
+        data:{
+           userName:user.given_name + ' ' + user.family_name,
+           email:user.email,
+           date:date,
+           time:selectedTime,
+           doctor:doctorDetails.documentId
+        }
+    }
+    Api.bookAppointment(data).then((res)=>{
+        console.log('Appointment booked successfully:', res.data);
+        toast("Appointment booked successfully.")
+    }).catch((err)=>{
+        console.log('Error booking appointment:', err);
+        toast.error("Error booking appointment.")
+    });    
+}
 
   useEffect(() => {
     generateTimeSlots()
@@ -92,6 +116,7 @@ export default function BookAppointment() {
         {/* Footer */}
         <div className="flex justify-end mt-6">
           <Button
+           onClick={()=> bookingAppointment()}
             disabled={!(date && selectedTime)}
             className=" text-black cursor-pointer"
           >
