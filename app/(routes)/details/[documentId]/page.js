@@ -2,6 +2,7 @@
 import Api from '@/app/_utils/Api';
 import React, { useEffect, useState } from 'react'
 import DoctorDetails from '../_components/DoctorDetails';
+import DoctorSuggition from '../_components/DoctorSuggition';
 
 export default function Details({params}) {
     // to display doctor details based on documentId  'params'
@@ -36,7 +37,9 @@ export default function Details({params}) {
                 <DoctorDetails doctorDetails={doctorDetails} />
             </div>
            {/* doctor suggition */}
-           <div></div>
+           <div>
+            <DoctorSuggition />
+           </div>
         </div>
     </div>
   )
