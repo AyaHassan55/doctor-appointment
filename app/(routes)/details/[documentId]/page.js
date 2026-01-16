@@ -33,7 +33,7 @@ export default function Details({params}) {
         <h2 className='font-bold text-[22px]'>Doctor Details</h2>
         <div className='grid md:grid-cols-4 grid-cols-1 gap-5 mt-5'>
            {/* doctor details */}
-            <div className=' col-span-3'>
+            <div className=' col-span-3 mt-5'>
                 <DoctorDetails doctorDetails={doctorDetails} />
             </div>
            {/* doctor suggition */}
