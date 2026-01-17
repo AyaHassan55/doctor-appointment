@@ -1,8 +1,24 @@
 import Image from 'next/image'
 import React from 'react'
-import { motion } from 'framer-motion' // لازم تثبتي framer-motion: npm i framer-motion
+import { motion } from 'framer-motion' 
+import { Button } from '@/components/ui/button'
+import CancelAppointment from './CancelAppointment'
+import Api from '@/app/_utils/Api'
+import { toast } from 'sonner'
 
-export default function MyBookingList({ bookingList }) {
+export default function MyBookingList({ bookingList,past,updateAppointment }) {
+    const onDeleteBooking=(item)=>{
+      Api.deleteBooking(item.documentId).then((res)=>{
+        console.log(res);
+        if(res){
+            toast('Appointment has been canceled')
+            updateAppointment();
+        }else{
+            toast('errrrrrrorrrrr')
+        }
+      })
+
+    }
   // Empty state
   if (!bookingList || bookingList.length === 0) {
     return (
@@ -74,15 +90,17 @@ export default function MyBookingList({ bookingList }) {
             </div>
           )}
 
-          <div className="mt-2 text-center flex flex-col gap-0.5">
+          <div className="mt-2 text-center flex flex-col gap-0.5 w-full">
             <h3 className="text-sm font-semibold text-gray-800">
               {item?.doctor?.name}
+             
             </h3>
             <p className="text-xs text-gray-500">📍 {item?.doctor?.address}</p>
             <p className="text-xs text-gray-500">📞 {item?.doctor?.phone}</p>
             <p className="text-xs text-lime-600 font-medium mt-1">
               ⏰ {new Date(item?.date).toLocaleString()}
             </p>
+            <p> {!past && <CancelAppointment cancelClick={()=>onDeleteBooking(item)} />}</p>
           </div>
         </div>
       ))}

@@ -34,7 +34,7 @@ function MyBooking() {
 }
 
   return (
-    <div className='px-4 md:px-10'>
+    <div className='px-4 md:px-10 '>
       <h2 className='font-bold text-2xl'>My Booking</h2>
 
 
@@ -42,24 +42,16 @@ function MyBooking() {
       <Tabs defaultValue="upcoming" className="w-full mt-8">
         {/* Tabs Header */}
         <TabsList
-          className="
-      w-full 
-      grid grid-cols-2 
-      bg-muted 
-      rounded-xl 
-      p-1
-    "
-        >
+        
+          className="w-full grid grid-cols-2 bg-muted rounded-xl p-1" >
           <TabsTrigger
             value="upcoming"
-            className="
+            className="cursor-pointer bg-amber-600
         w-full 
         rounded-lg 
         transition-all 
         duration-300 
-        data-[state=active]:bg-white
-        data-[state=active]:shadow
-        data-[state=active]:text-lime-700
+       
       "
           >
             Upcoming
@@ -83,12 +75,12 @@ function MyBooking() {
 
         {/* Upcoming Content */}
         <TabsContent value="upcoming" className="mt-6">
-          <MyBookingList bookingList={filterBookingList('upcoming')} />
+          <MyBookingList updateAppointment={()=>userBookingList()} past={false} bookingList={filterBookingList('upcoming')} />
         </TabsContent>
 
         {/* Past Content */}
         <TabsContent value="past" className="mt-6">
-          <MyBookingList bookingList={filterBookingList('past')}/>
+          <MyBookingList updateAppointment={()=>userBookingList()} past={true} bookingList={filterBookingList('past')}/>
         </TabsContent>
       </Tabs>
 
