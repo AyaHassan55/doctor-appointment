@@ -12,12 +12,14 @@ const axiosGlobal = axios.create({
 //  const getDoctorByID =(documentId)=>axiosGlobal.get(`/doctors/${documentId}?populate=*`);        
  const getDoctorByID =(documentId)=>axiosGlobal.get('/doctors/'+documentId+'?populate=*');
  const bookAppointment =(data)=>axiosGlobal.post('/appointments',data);
+ const myBookingList =(email)=>axiosGlobal.get('/appointments?filters[email][$eq]='+email+'&populate[doctor][populate]=image');
 
 export default  {
   getCategory,
   getDoctors,
   getDoctorsByCategory,
   getDoctorByID,
-  bookAppointment
+  bookAppointment,
+  myBookingList
 };
 

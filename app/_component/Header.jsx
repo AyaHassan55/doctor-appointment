@@ -48,7 +48,7 @@ export default function Header() {
         }
     ]
     return (
-        <div className={`fixed top-0 left-0 w-full z-50 transition-all duration-300  ${isScrolled
+        <div className={`sticky top-0 left-0 w-full z-50 transition-all duration-300  ${isScrolled
             ? "bg-white backdrop-blur-md shadow-md h-26"
             : "bg-transparent"
             }`}>
@@ -89,7 +89,7 @@ export default function Header() {
                             <PopoverContent className='w-48 flex flex-col bg-[#bff3bf75] border-none'> 
                                 <ul>
                                     <li className='mt-2 text-white p-2 hover:translate-x-2 transition-transform duration-300 ease-in-out cursor-pointer'>My Profile</li>
-                                    <li className='mt-2 text-white p-2 hover:translate-x-2 transition-transform duration-300 ease-in-out cursor-pointer'>My Booking</li>
+                                    <Link href={`/my-booking`} className='mt-2 text-white p-2 hover:translate-x-2 transition-transform duration-300 ease-in-out cursor-pointer'>My Booking</Link>
                                     <li className='mt-2 text-white p-2 hover:translate-x-2 transition-transform duration-300 ease-in-out cursor-pointer'>
                                         
                                         <LogoutLink>Log out</LogoutLink>
