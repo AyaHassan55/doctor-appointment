@@ -9,7 +9,7 @@ export default function doctorDetailsDetails({ doctorDetails }) {
 
     return (
         <>
-            <div className=' border p-5 rounded-lg  grid grid-cols-1 md:grid-cols-3'>
+            <div className=' border p-5 rounded-lg  grid grid-cols-1 md:grid-cols-3 pt-30'>
                 {/* doctorDetails image*/}
                 {/* <div> */}
 

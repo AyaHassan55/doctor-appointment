@@ -28,6 +28,7 @@ export default function Search({ params }) {
   };
 
   return (
+    
     <DoctorList doctors={doctors} heading={cname} />
   );
 }

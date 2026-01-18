@@ -29,7 +29,7 @@ export default function CategoryList() {
         })
     }
     return (
-        <div className='h-screen  flex flex-col mt-5'>
+        <div className='h-screen  flex flex-col mt-30'>
             <Command>
                 <CommandInput placeholder="Type a command or search..." />
                 <CommandList>

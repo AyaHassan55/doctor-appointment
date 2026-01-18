@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { LogoutLink, LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { Stethoscope, User, Calendar, LogOut, Menu, X } from 'lucide-react';
-
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
@@ -23,7 +23,8 @@ import {
     AvatarImage,
 } from "@/components/ui/avatar"
 
-import { usePathname } from "next/navigation"
+
+
 
 
 export default function Header() {
@@ -44,16 +45,18 @@ export default function Header() {
 
     // ----------------------------------
     const [isScrolled, setIsScrolled] = useState(false);
-
+ const [mounted, setMounted] = useState(false) // نعرف إننا على الكلاينت
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     useEffect(() => {
+            setMounted(true) // بعد ما الكومبوننت يتحمل على الكلاينت
+
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20);
+            setIsScrolled(window.scrollY > 0);
         };
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
-
+    if (!mounted) return null // قبل الهيدر متحمل على الكلاينت نخليه مش ظاهر أو شفاف
     const Menu = [
         {
             id: 1,
@@ -72,10 +75,14 @@ export default function Header() {
         }
     ]
     return (
-        <div className={`fixed top-0 left-0 w-full z-50 transition-all duration-300  ${isScrolled
+        <div className={`fixed left-0 top-0 w-full z-50 transition-all duration-300 
+            
+            ${isScrolled
             ? 'bg-white/95 backdrop-blur-md shadow-md'
             : 'bg-transparent'
-            }`}>
+            }`
+        }
+            >
             <div className='relative  flex items-center justify-between p-3 h-26 mb-6 md:px-10'>
 
                 {/* Logo */}
@@ -111,7 +118,7 @@ export default function Header() {
                     {user ? (
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                                <Button className="flex w-10 h-10 items-center gap-2 p-1 rounded-full hover:bg-muted transition-colors">
+                                <Button className="flex w-10 h-10items-center gap-2 p-1 rounded-full hover:bg-muted transition-colors">
                                     <Avatar className="w-10 h-10 border-2 border-primary/20">
                                         {user.profile_picture ? (
                                             <AvatarImage src={user.profile_picture} alt="User Profile" />

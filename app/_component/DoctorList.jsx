@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function DoctorList({ doctors, heading = "Popular Doctors" }) {
     return (
-        <div>
+        <div className='pt-30'>
             <h2 className='font-bold text-xl text-lime-600'>
                 {heading}
             </h2>

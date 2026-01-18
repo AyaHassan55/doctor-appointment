@@ -18,7 +18,7 @@ export default function Hero() {
                         loading="eager"
                     />
                     {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-r  from-[#0F2F2A]/60  via-[#0F2F2A]/75  to-[#0F2F2A]/40" />
+                    <div className="absolute inset-0 bg-gradient-to-r  from-[#0F2F2A]/30  via-[#0F2F2A]/45  to-[#0F2F2A]/30" />
 
                 </div>
                 {/* Bottom White Fade */}
