@@ -4,9 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Star, MapPin, Clock, ArrowDown } from 'lucide-react';
+import DoctorSkeleton from './_doctorSkelton';
 export default function DoctorList({ doctors, heading = "Popular Doctors" }) {
-    const [showAll,setShowAll] = useState(false);
-    const visibleDoctors =showAll ?doctors : doctors.slice(0,4);
+    const [showAll, setShowAll] = useState(false);
+    const visibleDoctors = showAll ? doctors : doctors.slice(0, 4);
     return (
         <section className='py-20 bg-muted '>
             <div className=' mx-auto px-4'>
@@ -38,67 +39,78 @@ export default function DoctorList({ doctors, heading = "Popular Doctors" }) {
                                 />
                             </Button>
                         </div>}
-                   
+
                 </div>
                 {/* grid */}
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
-                    {
-                        visibleDoctors?.map((doctor, index) => (
-
-                            <Link href={`/details/${doctor?.documentId}`} key={index}>
-                                <div className='bg-white rounded-2xl p-5  hover:scale-104 transition-transform duration-500' 
-                                style={{ transitionDelay: `${index * 0.1}s` }}>
-                                   <div className='relative mb-4 overflow-hidden rounded-2xl ' >
-
-                                      <Image src={`http://localhost:1337${doctor?.image?.[0]?.url}`}
-                                        width={100} height={50}
-                                        className='h-56 w-full object-cover '
-                                        unoptimized
-                                        alt={doctor?.name}
-                                      />
-
-
-                                   </div>
-
-                                <div>
-                                    <div className="flex items-center gap-1 mb-2">
-                                        <Star className="w-4 h-4 fill-warning text-warning" />
-                                        <span className="text-sm font-medium text-foreground">{doctor.rating}</span>
-                                        <span className="text-sm text-muted-foreground">({doctor?.review} reviews)</span>
-                                    </div>
-
-                                    <h3 className="font-semibold text-lg text-foreground mb-1 group-hover:text-primary transition-colors">
-                                        {doctor?.name}
-                                    </h3>
-                                    <p className="text-primary font-medium text-sm mb-3">{doctor?.Category?.name}</p>
-
-                                    <div className="space-y-2 mb-4">
-                                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                                            <Clock className="w-4 h-4" />
-                                            <span>{doctor?.year_of_experience} years experience</span>
-                                        </div>
-                                        <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                                            <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
-                                            <span className="line-clamp-1">{doctor?.address}</span>
-                                        </div>
-                                    </div>
-
-                                        <div className="w-full text-center bg-primary text-white py-2 rounded-md font-medium mt-3 hover:bg-primary/90 transition">
-                                            Book Now
-                                        </div>
-
-                                </div>
-
-                                </div>
-
-                            </Link>
-
-
-
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {!doctors || doctors.length === 0
+                        ? Array.from({ length: 4 }).map((_, i) => (
+                            <DoctorSkeleton key={i} />
                         ))
-                    }
+                        : visibleDoctors.map((doctor, index) => (
+                            <Link href={`/details/${doctor?.documentId}`} key={index}>
+                                <div className="bg-white rounded-2xl p-5 hover:scale-104 transition-transform duration-500">
+                                    {
+                                        visibleDoctors?.map((doctor, index) => (
+
+                                            <Link href={`/details/${doctor?.documentId}`} key={index}>
+                                                <div className='bg-white rounded-2xl p-5  hover:scale-104 transition-transform duration-500'
+                                                    style={{ transitionDelay: `${index * 0.1}s` }}>
+                                                    <div className='relative mb-4 overflow-hidden rounded-2xl ' >
+
+                                                        <Image src={`http://localhost:1337${doctor?.image?.[0]?.url}`}
+                                                            width={100} height={50}
+                                                            className='h-56 w-full object-cover '
+                                                            unoptimized
+                                                            alt={doctor?.name}
+                                                        />
+
+
+                                                    </div>
+
+                                                    <div>
+                                                        <div className="flex items-center gap-1 mb-2">
+                                                            <Star className="w-4 h-4 fill-warning text-warning" />
+                                                            <span className="text-sm font-medium text-foreground">{doctor.rating}</span>
+                                                            <span className="text-sm text-muted-foreground">({doctor?.review} reviews)</span>
+                                                        </div>
+
+                                                        <h3 className="font-semibold text-lg text-foreground mb-1 group-hover:text-primary transition-colors">
+                                                            {doctor?.name}
+                                                        </h3>
+                                                        <p className="text-primary font-medium text-sm mb-3">{doctor?.Category?.name}</p>
+
+                                                        <div className="space-y-2 mb-4">
+                                                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                                                <Clock className="w-4 h-4" />
+                                                                <span>{doctor?.year_of_experience} years experience</span>
+                                                            </div>
+                                                            <div className="flex items-start gap-2 text-sm text-muted-foreground">
+                                                                <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
+                                                                <span className="line-clamp-1">{doctor?.address}</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="w-full text-center bg-primary text-white py-2 rounded-md font-medium mt-3 hover:bg-primary/90 transition">
+                                                            Book Now
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </Link>
+
+
+
+                                        ))
+                                    }
+                                </div>
+                            </Link>
+                        ))}
                 </div>
-               
+
+
             </div>
         </section>
 
