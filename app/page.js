@@ -6,6 +6,7 @@ import CategorySearch from "./_component/Category_Search";
 import DoctorList from "./_component/DoctorList";
 import { useEffect, useState } from "react";
 import Api from "./_utils/Api";
+import FeaturesSection from "./_component/FeatureSection";
 export default function Home() {
   const [doctors, setDoctors] =useState([]);
 
@@ -24,6 +25,7 @@ export default function Home() {
       <Hero />
       <CategorySearch />
       <DoctorList doctors={doctors} />
+      <FeaturesSection />
     </div>
   );
 }
