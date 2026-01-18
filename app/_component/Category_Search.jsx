@@ -22,11 +22,11 @@ export default function CategorySearch() {
     }
     return (
         <div className='flex flex-col mb-10 items-center'> 
-            <h2 className='font-bold text-4xl'><span className='text-lime-600'>Search</span> Categories</h2>
+            {/* <h2 className='font-bold text-4xl'><span className='text-lime-600'>Search</span> Categories</h2>
             <div className='flex w-full max-w-sm items-center justify-center'>
                 <Input placeholder="Search for catgory" className='w-full mt-4 mb-8 mx-3' />
                 <Button type='submit' className="mb-4">Submit</Button>
-            </div>
+            </div> */}
             <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 mt-8'>
                 {categoriesList.map((cat, index) => (
                     <Link href={`/search/${cat?.name}`} key={cat.id} className='flex flex-col items-center text-center m-2 bg-lime-200 rounded-lg p-5 hover:scale-110 transition-all duration-300 cursor-pointer'>

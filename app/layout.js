@@ -22,11 +22,11 @@ export default function RootLayout({ children }) {
         className={`${outfit.className}  antialiased`}
       >
         <Header />
-  <main className="pt-26">
-    {children}
-    <Toaster />
-  </main>
-  <Footer />
+        <main className="pt-26">
+            {children}
+            <Toaster />
+          </main>
+        <Footer />
       </body>
     </html>
   );

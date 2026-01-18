@@ -1,35 +1,59 @@
 "use client";
 import React from 'react'
-import Image from 'next/image'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
+
 import { useState, useEffect } from "react";
 import { LogoutLink, LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { Stethoscope, User, Calendar, LogOut, Menu, X } from 'lucide-react';
+
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
+
 import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
+    DropdownMenu,
+    DropdownMenuTrigger,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu"
+
+import {
+    Avatar,
+    AvatarFallback,
+    AvatarImage,
+} from "@/components/ui/avatar"
+
+import { usePathname } from "next/navigation"
+
 
 export default function Header() {
-    const [isScrolled, setIsScrolled] = useState(false);
+
+    const pathname = usePathname()
+
     const { user } = useKindeBrowserClient();
     useEffect(() => {
         console.log('user', user);
     }, [user]);
 
+    const getInitials = (user) => {
+        return (
+            user?.given_name?.[0]?.toUpperCase() +
+            user?.family_name?.[0]?.toUpperCase()
+        )
+    }
+
+    // ----------------------------------
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 50) {
-                setIsScrolled(true);
-            } else {
-                setIsScrolled(false);
-            }
+            setIsScrolled(window.scrollY > 20);
         };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
     const Menu = [
         {
             id: 1,
@@ -48,62 +72,101 @@ export default function Header() {
         }
     ]
     return (
-        <div className={`sticky top-0 left-0 w-full z-50 transition-all duration-300  ${isScrolled
-            ? "bg-white backdrop-blur-md shadow-md h-26"
-            : "bg-transparent"
+        <div className={`fixed top-0 left-0 w-full z-50 transition-all duration-300  ${isScrolled
+            ? 'bg-white/95 backdrop-blur-md shadow-md'
+            : 'bg-transparent'
             }`}>
-            <div className='flex items-center justify-between p-3 h-26 mb-6 md:px-10'>
-                <div className='flex items-center gap-10'>
-                    <Image src={"/assets/images/logo.png"} alt="logo" width={100} height={100} />
-                    <ul className='md:flex items-center gap-8 hidden'>
-                        {Menu.map((item, index) => (
-                            <Link key={index} href={item.path}>
-                                <li className='hover:text-lime-600 cursor-pointer hover:scale-105 transition-all'>{item.name}</li>
-                            </Link>
-                        ))}
-                    </ul>
-                </div>
-                {user ?
-                    user.profile_picture ? (
-                        <Popover>
-                            <PopoverTrigger><Image src={user.profile_picture} alt="User Profile" width={40} height={40} className="rounded-full" /></PopoverTrigger>
-                            <PopoverContent>
-                                <ul>
-                                    <li>
-                                        <LogoutLink>Log out</LogoutLink>
-                                    </li>
-                                </ul>
-                            </PopoverContent>
-                        </Popover>
+            <div className='relative  flex items-center justify-between p-3 h-26 mb-6 md:px-10'>
+
+                {/* Logo */}
+                <Link href="/" className="flex items-center gap-2 group">
+                    <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center transition-transform group-hover:scale-105">
+                        <Stethoscope className="w-5 h-5 text-primary-foreground" />
+                    </div>
+                    <span className="text-xl font-bold text-foreground">
+                        Medi<span className="text-primary">Care</span>
+                    </span>
+                </Link>
 
 
+
+
+                {/* Desktop Navigation */}
+                <nav className="hidden md:flex items-center gap-8">
+                    {Menu.map((link, index) => (
+                        <Link
+                            key={index}
+                            href={link.path}
+                            className={`text-sm font-medium transition-colors hover:text-primary ${pathname === link.path
+                                ? 'text-primary'
+                                : 'text-muted-foreground'
+                                }`}
+                        >
+                            {link.name}
+                        </Link>
+                    ))}
+                </nav>
+
+                <div className="hidden md:flex items-center gap-4">
+                    {user ? (
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button className="flex w-10 h-10 items-center gap-2 p-1 rounded-full hover:bg-muted transition-colors">
+                                    <Avatar className="w-10 h-10 border-2 border-primary/20">
+                                        {user.profile_picture ? (
+                                            <AvatarImage src={user.profile_picture} alt="User Profile" />
+                                        ) : (
+                                            <AvatarFallback className="bg-primary text-primary-foreground font-semibold">
+                                                {getInitials(user)}
+                                            </AvatarFallback>
+                                        )}
+                                    </Avatar>
+                                </Button>
+                            </DropdownMenuTrigger>
+
+                            <DropdownMenuContent align="end" className="w-56">
+                                {/* User Info */}
+                                <div className="px-3 py-2">
+                                    <p className="font-medium">
+                                        {user.given_name} {user.family_name}
+                                    </p>
+                                    <p className="text-sm text-muted-foreground">
+                                        {user.email}
+                                    </p>
+                                </div>
+
+                                <DropdownMenuSeparator />
+
+                                {/* Menu Items */}
+                                <DropdownMenuItem asChild>
+                                    <Link href="/profile" className="cursor-pointer">
+                                        <User className="w-4 h-4 text-gray-600" />
+                                        My Profile
+                                    </Link>
+                                </DropdownMenuItem>
+
+                                <DropdownMenuItem asChild>
+                                    <Link href="/my-booking" className="cursor-pointer"> <Calendar className="w-4 h-4 text-gray-600" />
+                                        My Booking
+                                    </Link>
+                                </DropdownMenuItem>
+
+                                <DropdownMenuSeparator />
+
+                                <DropdownMenuItem className="text-destructive cursor-pointer"><LogOut className="w-4 h-4 text-destructive" />
+                                    <LogoutLink>Log out</LogoutLink>
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
                     ) : (
-                        <Popover>
-                            <PopoverTrigger><div className='w-10 h-10 rounded-full bg-lime-500 text-white  flex items-center justify-center font-semibold uppercase cursor-pointer'
-
-                                title={user.given_name + " " + user.family_name}
-                            >
-                                {user.given_name[0].toUpperCase() + user.family_name[0].toUpperCase()}
-
-                            </div></PopoverTrigger>
-                            <PopoverContent className='w-48 flex flex-col bg-[#bff3bf75] border-none'> 
-                                <ul>
-                                    <li className='mt-2 text-white p-2 hover:translate-x-2 transition-transform duration-300 ease-in-out cursor-pointer'>My Profile</li>
-                                    <Link href={`/my-booking`} className='mt-2 text-white p-2 hover:translate-x-2 transition-transform duration-300 ease-in-out cursor-pointer'>My Booking</Link>
-                                    <li className='mt-2 text-white p-2 hover:translate-x-2 transition-transform duration-300 ease-in-out cursor-pointer'>
-                                        
-                                        <LogoutLink>Log out</LogoutLink>
-                                    </li>
-                                </ul>
-                            </PopoverContent>
-                        </Popover>
+                        <LoginLink>
+                            <Button>Get Started</Button>
+                        </LoginLink>
+                    )}
+                </div>
 
 
-                    )
-                    // 
-                    : <LoginLink>
-                        <Button>Get Started</Button>
-                    </LoginLink>}
+
 
 
 
