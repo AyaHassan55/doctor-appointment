@@ -29,6 +29,8 @@ export default function Search({ params }) {
 
   return (
     
-    <DoctorList doctors={doctors} heading={cname} />
+     <div className="bg-[#d8d4d0]">
+       <DoctorList doctors={doctors} heading={cname} />
+     </div>
   );
 }

@@ -20,7 +20,7 @@ export default function Home() {
     })
   }
   return (
-    <div >
+    <div className="flex flex-col gap-3">
       <Hero />
       <CategorySearch />
       <DoctorList doctors={doctors} />
