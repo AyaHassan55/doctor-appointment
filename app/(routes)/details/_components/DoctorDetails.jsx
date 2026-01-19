@@ -2,14 +2,15 @@
 
 import React from 'react'
 import Image from 'next/image'
-import { GraduationCap, MapPin, Clock, Star  } from 'lucide-react'
+import { GraduationCap, MapPin, Clock, Star } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import BookAppointment from '../BookAppointment'
 
-export default function doctorDetailsDetails({ doctorDetails }) {
+export default function DoctorDetails({ doctorDetails}) {
 
     return (
         <>
+           
             <div className='lg:col-span-2 animate-fade-in'>
                 <div className='bg-card rounded-2xl shadow-card p-8 transition-all duration-300 hover:shadow-card-hover'>
                     <div className="flex flex-col lg:flex-row gap-8">
@@ -64,7 +65,7 @@ export default function doctorDetailsDetails({ doctorDetails }) {
                             {/* <Button size="lg" className="w-full sm:w-auto">
                                 Book Appointment
                             </Button> */}
-                            <BookAppointment  doctorDetails={doctorDetails}/>
+                            <BookAppointment doctorDetails={doctorDetails} />
 
                         </div>
                     </div>
@@ -72,7 +73,10 @@ export default function doctorDetailsDetails({ doctorDetails }) {
 
             </div>
 
-          
+           
+     
+
+
 
 
         </>
