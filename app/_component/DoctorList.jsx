@@ -51,7 +51,7 @@ export default function DoctorList({ doctors, heading = "Popular Doctors" }) {
                             <Link href={`/details/${doctor?.documentId}`} key={index}>
                                 <div className="bg-white rounded-2xl p-5 hover:scale-104 transition-transform duration-500">
                                     {
-                                        visibleDoctors?.map((doctor, index) => (
+                                        // visibleDoctors?.map((doctor, index) => (
 
                                             <Link href={`/details/${doctor?.documentId}`} key={index}>
                                                 <div className='bg-white rounded-2xl p-5  hover:scale-104 transition-transform duration-500'
@@ -103,7 +103,7 @@ export default function DoctorList({ doctors, heading = "Popular Doctors" }) {
 
 
 
-                                        ))
+                                        // ))
                                     }
                                 </div>
                             </Link>

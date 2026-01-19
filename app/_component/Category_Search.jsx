@@ -7,38 +7,51 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function CategorySearch() {
-    const [categoriesList, setCategoriesList] =useState([]);
-    useEffect(()=>{
+    const [categoriesList, setCategoriesList] = useState([]);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
         getCategoryList();
-    },[])
-    const getCategoryList = ()=>{
-        Api.getCategory().then((res)=>{
+    }, [])
+    const getCategoryList = () => {
+        setLoading(true)
+        Api.getCategory().then((res) => {
             setCategoriesList(res.data.data);
+
             // console.log('ayaaaaaa')
             console.log(res.data.data);
-        }).catch((err)=>{
+        }).catch((err) => {
             console.log(err);
-        })
+        }).finally(() => {
+            setLoading(false);
+        });
     }
     return (
-        <div className='flex flex-col mb-10 items-center'> 
-            {/* <h2 className='font-bold text-4xl'><span className='text-lime-600'>Search</span> Categories</h2>
-            <div className='flex w-full max-w-sm items-center justify-center'>
-                <Input placeholder="Search for catgory" className='w-full mt-4 mb-8 mx-3' />
-                <Button type='submit' className="mb-4">Submit</Button>
-            </div> */}
+        <div className='flex flex-col mb-10 items-center'>
             <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 mt-8'>
-                {categoriesList.map((cat, index) => (
-                    <Link href={`/search/${cat?.name}`} key={cat.id} className='flex flex-col items-center text-center m-2 bg-lime-200 rounded-lg p-5 hover:scale-110 transition-all duration-300 cursor-pointer'>
-                        <Image src={`http://localhost:1337${cat?.icon[0]?.url}`}
-                            width={50} height={50} alt={cat.name}
-                            unoptimized
+                {loading ?
+                    Array.from({ length: 4 }).map((_, i) => (
+                        <div
+                            key={i}
+                            className="h-40 w-full bg-gray-300 rounded-full animate-pulse"
                         />
-                        <p className="mt-2 font-medium">{cat?.name}</p>
+                    ))
 
-                    </Link>
 
-                ))}
+                    :
+                    categoriesList.map((cat, index) => (
+                        <Link href={`/search/${cat?.name}`} key={index} className='flex flex-col items-center text-center m-2 bg-lime-200 rounded-lg p-5 hover:scale-110 transition-all duration-300 cursor-pointer'>
+                            <Image src={`http://localhost:1337${cat?.icon[0]?.url}`}
+                                width={50} height={50} alt={cat.name}
+                                unoptimized
+                            />
+                            <p className="mt-2 font-medium">{cat?.name}</p>
+
+                        </Link>
+
+                    ))
+
+                }
+
             </div>
         </div>
     )
