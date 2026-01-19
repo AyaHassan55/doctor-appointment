@@ -70,9 +70,9 @@ export default function DoctorList({ doctors, heading = "Popular Doctors" }) {
 
                                                     <div>
                                                         <div className="flex items-center gap-1 mb-2">
-                                                            <Star className="w-4 h-4 fill-warning text-warning" />
+                                                            <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
                                                             <span className="text-sm font-medium text-foreground">{doctor.rating}</span>
-                                                            <span className="text-sm text-muted-foreground">({doctor?.review} reviews)</span>
+                                                            <span className="text-sm text-muted-foreground">({doctor?.reviews} reviews)</span>
                                                         </div>
 
                                                         <h3 className="font-semibold text-lg text-foreground mb-1 group-hover:text-primary transition-colors">

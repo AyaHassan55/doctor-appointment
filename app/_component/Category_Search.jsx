@@ -32,7 +32,7 @@ export default function CategorySearch() {
                     Array.from({ length: 4 }).map((_, i) => (
                         <div
                             key={i}
-                            className="h-40 w-full bg-gray-300 rounded-full animate-pulse"
+                            className="h-40 w-full bg-gray-200 rounded-full animate-pulse"
                         />
                     ))
 
