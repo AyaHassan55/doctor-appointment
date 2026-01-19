@@ -1,107 +1,100 @@
 import Image from 'next/image'
 import React from 'react'
-import { motion } from 'framer-motion' 
-import { Button } from '@/components/ui/button'
+import { motion } from 'framer-motion'
 import CancelAppointment from './CancelAppointment'
 import Api from '@/app/_utils/Api'
 import { toast } from 'sonner'
+import { CalendarDays, Clock, MapPin } from "lucide-react"
 
-export default function MyBookingList({ bookingList,past,updateAppointment }) {
-    const onDeleteBooking=(item)=>{
-      Api.deleteBooking(item.documentId).then((res)=>{
-        console.log(res);
-        if(res){
-            toast('Appointment has been canceled')
-            updateAppointment();
-        }else{
-            toast('errrrrrrorrrrr')
-        }
-      })
 
-    }
-  // Empty state
+export default function MyBookingList({ bookingList, past, updateAppointment }) {
+
+  const onDeleteBooking = (item) => {
+    Api.deleteBooking(item.documentId).then(() => {
+      toast('Appointment has been canceled')
+      updateAppointment()
+    })
+  }
+
+  //  Empty State
   if (!bookingList || bookingList.length === 0) {
     return (
       <motion.div
         className="flex flex-col items-center justify-center py-20 text-center text-gray-500"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
       >
-        <motion.div
-          className="mb-4"
-          animate={{ y: [0, -10, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
-        >
-          <Image
-            src="/empty.svg" 
-            width={120}
-            height={120}
-            alt="No bookings"
-          />
-        </motion.div>
-        <motion.h3
-          className="text-lg font-semibold"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-        >
+        <Image src="/empty.svg" width={120} height={120} alt="No bookings" />
+        <h3 className="text-lg font-semibold mt-4">
           No Bookings Yet
-        </motion.h3>
-        <motion.p
-          className="text-sm mt-1"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
-        >
+        </h3>
+        <p className="text-sm mt-1 max-w-md">
           You don’t have any appointments booked yet. Start exploring and book your first appointment!
-        </motion.p>
-        <motion.button
-          className="mt-4 px-4 py-2 bg-lime-600 text-white rounded-lg shadow hover:bg-lime-700 transition"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Book Now
-        </motion.button>
+        </p>
       </motion.div>
     )
   }
 
-  // List of bookings
+  //  Booking Cards
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <div className="flex flex-col gap-6">
       {bookingList.map((item) => (
         <div
           key={item.id}
-          className="flex flex-col items-center p-4 bg-white rounded-xl shadow hover:shadow-lg transition-shadow duration-300"
+          className="flex items-center justify-between bg-white rounded-2xl p-5 shadow hover:shadow-lg transition"
         >
-          {item?.doctor?.image?.[0]?.url ? (
-            <Image
-              src={`http://localhost:1337${item.doctor.image[0].url}`}
-              width={80}
-              height={80}
-              alt="Doctor"
-              unoptimized
-              className=" w-80 h-80 border"
-            />
-          ) : (
-            <div className="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center text-xs text-gray-500">
-              No Image
+          {/* Left */}
+          <div className="flex items-center gap-4">
+            {/* Image */}
+            <div className="w-40 h-40 rounded-xl overflow-hidden bg-gray-200">
+              {item?.doctor?.image?.[0]?.url && (
+                <Image
+                  src={`http://localhost:1337${item.doctor.image[0].url}`}
+                  width={100}
+                  height={100}
+                  alt="Doctor"
+                  className="object-cover w-full h-full"
+                  unoptimized
+                />
+              )}
             </div>
-          )}
 
-          <div className="mt-2 text-center flex flex-col gap-0.5 w-full">
-            <h3 className="text-sm font-semibold text-gray-800">
-              {item?.doctor?.name}
-             
-            </h3>
-            <p className="text-xs text-gray-500">📍 {item?.doctor?.address}</p>
-            <p className="text-xs text-gray-500">📞 {item?.doctor?.phone}</p>
-            <p className="text-xs text-lime-600 font-medium mt-1">
-              ⏰ {new Date(item?.date).toLocaleString()}
-            </p>
-            <p> {!past && <CancelAppointment cancelClick={()=>onDeleteBooking(item)} />}</p>
+            {/* Info */}
+            <div>
+              <h3 className="text-base font-semibold">
+                {item?.doctor?.name}
+              </h3>
+
+              <p className="text-sm text-[#138d75]">
+                {item?.doctor?.Category}
+              </p>
+
+              <div className="text-sm text-gray-500 mt-2 space-y-1">
+                <div className="flex items-center gap-2">
+                  <CalendarDays className="w-4 h-4 text-[#138d75]" />
+                  <span>{new Date(item.date).toLocaleDateString()}</span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-[#138d75]" />
+                  <span>{new Date(item.date).toLocaleTimeString()}</span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-[#138d75]" />
+                  <span>{item?.doctor?.address}</span>
+                </div>
+              </div>
+
+            </div>
           </div>
+
+          {/* Right */}
+          {!past && (
+            <CancelAppointment
+              cancelClick={() => onDeleteBooking(item)}
+            />
+          )}
         </div>
       ))}
     </div>

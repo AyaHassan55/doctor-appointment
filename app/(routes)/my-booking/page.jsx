@@ -33,47 +33,35 @@ function MyBooking() {
   })
 }
 
+
   return (
-    <div className='px-4 md:px-10 '>
-      <h2 className='font-bold text-2xl'>My Booking</h2>
+    <div className='px-4 md:px-60 mt-26 mb-30'>
+      {/* Page Header */}
+          <div className="mb-8">
+            <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
+              My Appointments
+            </h1>
+            <p className="text-muted-foreground">
+              Manage your upcoming and past appointments
+            </p>
+          </div>
 
 
 
-      <Tabs defaultValue="upcoming" className="w-full mt-8">
+      <Tabs defaultValue="upcoming" className="w-full ">
         {/* Tabs Header */}
-        <TabsList
-        
-          className="w-full grid grid-cols-2 bg-muted rounded-xl p-1" >
-          <TabsTrigger
-            value="upcoming"
-            className="cursor-pointer bg-amber-600
-        w-full 
-        rounded-lg 
-        transition-all 
-        duration-300 
-       
-      "
-          >
-            Upcoming
-          </TabsTrigger>
+         <TabsList className="w-full mb-6 grid grid-cols-2">
+              <TabsTrigger value="upcoming" className="text-base">
+                Upcoming ({bookingList.length})
+              </TabsTrigger>
+              <TabsTrigger value="past" className="text-base">
+                Past 
+              </TabsTrigger>
+            </TabsList>
 
-          <TabsTrigger
-            value="past"
-            className="
-        w-full 
-        rounded-lg 
-        transition-all 
-        duration-300 
-        data-[state=active]:bg-white
-        data-[state=active]:shadow
-        data-[state=active]:text-lime-700
-      "
-          >
-            Past
-          </TabsTrigger>
-        </TabsList>
 
         {/* Upcoming Content */}
+        
         <TabsContent value="upcoming" className="mt-6">
           <MyBookingList updateAppointment={()=>userBookingList()} past={false} bookingList={filterBookingList('upcoming')} />
         </TabsContent>

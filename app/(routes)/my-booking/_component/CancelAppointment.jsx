@@ -16,7 +16,12 @@ function CancelAppointment({ cancelClick }) {
         <div>
             <AlertDialog>
                 <AlertDialogTrigger asChild>
-                    <Button variant="destructive">Cancel Appointment</Button>
+                    <Button
+                        variant="outline"
+                        className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white rounded-xl px-5 cursor-pointer"
+                    >
+                        ✕  Cancel
+                    </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                     <AlertDialogHeader>
