@@ -39,13 +39,27 @@ export default function CategorySearch() {
 
                     :
                     categoriesList.map((cat, index) => (
-                        <Link href={`/search/${cat?.name}`} key={index} className='flex flex-col items-center text-center m-2 bg-lime-200 rounded-lg p-5 hover:scale-110 transition-all duration-300 cursor-pointer'>
-                            <Image src={`http://localhost:1337${cat?.icon[0]?.url}`}
-                                width={50} height={50} alt={cat.name}
-                                unoptimized
-                            />
-                            <p className="mt-2 font-medium">{cat?.name}</p>
+                        <Link href={`/search/${cat?.name}`} key={index} className='flex flex-col items-center text-center m-2  rounded-lg p-5 hover:scale-110 transition-all duration-300 cursor-pointer'>
+                            
+                            
+                            <div className="bg-white rounded-full p-6 flex flex-col items-center text-center shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
 
+                                {/* Icon */}
+                                <div className="w-16 h-16 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary/20 transition">
+                                    <Image
+                                        src={`http://localhost:1337${cat?.icon[0]?.url}`}
+                                        alt={cat.name}
+                                        width={100}
+                                        height={100}
+                                        unoptimized
+                                    />
+                                </div>
+
+                                {/* Name */}
+                                <h3 className="text-sm font-semibold text-gray-800 group-hover:text-primary transition">
+                                    {cat?.name}
+                                </h3>
+                            </div>
                         </Link>
 
                     ))

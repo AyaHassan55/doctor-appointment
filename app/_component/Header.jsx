@@ -118,7 +118,7 @@ export default function Header() {
                     {user ? (
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                                <Button className="flex w-10 h-10items-center gap-2 p-1 rounded-full hover:bg-muted transition-colors">
+                                <Button className="flex w-10 h-10 items-center gap-2 p-1 rounded-full hover:bg-grey-200 hover:cursor-pointer transition-colors">
                                     <Avatar className="w-10 h-10 border-2 border-primary/20">
                                         {user.profile_picture ? (
                                             <AvatarImage src={user.profile_picture} alt="User Profile" />
