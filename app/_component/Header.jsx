@@ -146,7 +146,7 @@ export default function Header() {
 
                                 {/* Menu Items */}
                                 <DropdownMenuItem asChild>
-                                    <Link href="/profile" className="cursor-pointer">
+                                    <Link href="/my-profile" className="cursor-pointer">
                                         <User className="w-4 h-4 text-gray-600" />
                                         My Profile
                                     </Link>

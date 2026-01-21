@@ -14,11 +14,12 @@ import { cn } from '@/lib/utils'
 import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs'
 import Api from '@/app/_utils/Api'
 import { toast } from "sonner"
+import { useRouter } from 'next/navigation'
 export default function BookAppointment({doctorDetails}) {
   const [date, setDate] = useState(new Date())
   const [timeSlots, setTimeSlots] = useState([])
   const [selectedTime, setSelectedTime] = useState(null);
-  
+  const router=useRouter()
 //  1- book appointment
   const {user} = useKindeBrowserClient();
 //  2- book appointment
@@ -34,7 +35,9 @@ const bookingAppointment = () => {
     }
     Api.bookAppointment(data).then((res)=>{
         console.log('Appointment booked successfully:', res.data);
-        toast("Appointment booked successfully.")
+        toast("Appointment booked successfully.");
+        router.push('/my-booking')
+
     }).catch((err)=>{
         console.log('Error booking appointment:', err);
         toast.error("Error booking appointment.")
@@ -94,7 +97,7 @@ const bookingAppointment = () => {
           <div className=''>
             <h3 className="font-semibold mb-3 text-center">Available Time</h3>
 
-            <div className="grid grid-cols-3 gap-3 max-h-[300px] overflow-y-auto pr-2">
+            <div className="grid grid-cols-3 gap-3 max-h-75 overflow-y-auto pr-2">
               {timeSlots.map((time, index) => (
                 <button
                   key={index}
@@ -102,8 +105,8 @@ const bookingAppointment = () => {
                   className={cn(
                     "border rounded-full py-2 text-sm transition",
                     selectedTime === time
-                      ? "bg-lime-600 text-blak border-lime-600"
-                      : "hover:border-lime-600 hover:text-lime-600"
+                      ? "bg-[#149066] text-blak border-[#149066]"
+                      : "hover:border-[#149066] hover:text-[#149066]"
                   )}
                 >
                   {time}
