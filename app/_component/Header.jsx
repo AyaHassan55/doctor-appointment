@@ -56,7 +56,7 @@ export default function Header() {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
-    if (!mounted) return null // قبل الهيدر متحمل على الكلاينت نخليه مش ظاهر أو شفاف
+    if (!mounted) return null 
     const Menu = [
         {
             id: 1,
@@ -114,7 +114,7 @@ export default function Header() {
                     ))}
                 </nav>
 
-                <div className="hidden md:flex items-center gap-4">
+                <div className=" md:flex items-center gap-4">
                     {user ? (
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>

@@ -27,7 +27,7 @@ export default function CategorySearch() {
     }
     return (
         <div className='flex flex-col mb-10 items-center'>
-            <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 mt-8'>
+            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 mt-8'>
                 {loading ?
                     Array.from({ length: 4 }).map((_, i) => (
                         <div

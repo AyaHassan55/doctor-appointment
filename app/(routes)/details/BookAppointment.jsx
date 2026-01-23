@@ -15,34 +15,36 @@ import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs'
 import Api from '@/app/_utils/Api'
 import { toast } from "sonner"
 import { useRouter } from 'next/navigation'
-export default function BookAppointment({doctorDetails}) {
+export default function BookAppointment({ doctorDetails }) {
   const [date, setDate] = useState(new Date())
   const [timeSlots, setTimeSlots] = useState([])
   const [selectedTime, setSelectedTime] = useState(null);
-  const router=useRouter()
-//  1- book appointment
-  const {user} = useKindeBrowserClient();
-//  2- book appointment
-const bookingAppointment = () => {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter()
+  //  1- book appointment
+  const { user } = useKindeBrowserClient();
+  //  2- book appointment
+  const bookingAppointment = () => {
+    setLoading(true);
     const data = {
-        data:{
-           userName:user.given_name + ' ' + user.family_name,
-           email:user.email,
-           date:date,
-           time:selectedTime,
-           doctor:doctorDetails.documentId
-        }
+      data: {
+        userName: user.given_name + ' ' + user.family_name,
+        email: user.email,
+        date: date,
+        time: selectedTime,
+        doctor: doctorDetails.documentId
+      }
     }
-    Api.bookAppointment(data).then((res)=>{
-        console.log('Appointment booked successfully:', res.data);
-        toast("Appointment booked successfully.");
-        router.push('/my-booking')
+    Api.bookAppointment(data).then((res) => {
+      console.log('Appointment booked successfully:', res.data);
+      toast("Appointment booked successfully.");
+      router.push('/my-booking')
 
-    }).catch((err)=>{
-        console.log('Error booking appointment:', err);
-        toast.error("Error booking appointment.")
-    });    
-}
+    }).catch((err) => {
+      console.log('Error booking appointment:', err);
+      toast.error("Error booking appointment.")
+    }).finally(() => setLoading(false));
+  }
 
   useEffect(() => {
     generateTimeSlots()
@@ -64,7 +66,7 @@ const bookingAppointment = () => {
   const pastDay = (date) => {
     const today = new Date()
     return date < today
-  } 
+  }
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -119,11 +121,35 @@ const bookingAppointment = () => {
         {/* Footer */}
         <div className="flex justify-end mt-6">
           <Button
-           onClick={()=> bookingAppointment()}
-            disabled={!(date && selectedTime)}
+            onClick={() => bookingAppointment()}
+            disabled={!(date && selectedTime) || loading}
             className=" text-black cursor-pointer"
           >
-            Confirm Appointment
+            {loading ? (
+              <svg
+                className="animate-spin h-5 w-5 text-black"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                ></path>
+              </svg>
+            ) : (
+              "Confirm Appointment"
+            )}
+
           </Button>
         </div>
       </DialogContent>

@@ -37,12 +37,12 @@ export default function CategoryList() {
                     <CommandGroup heading="Suggestions">
                         {categoriesList.map((cat) => (
                             <CommandItem key={cat.id}>
-                                <Link href={`/search/${cat?.name}`} className='p- flex gap-2 hover:bg-lime-300 w-full cursor-pointer'>
+                                <Link href={`/search/${cat?.name}`} className='p-2 flex gap-2 hover:bg-[#14907742] w-full cursor-pointer'>
                                      <Image src={`http://localhost:1337${cat?.icon[0]?.url}`}
                                         width={20} height={20} alt={cat?.name}
                                         unoptimized
                                     />
-                                    <label className="ml-2">{cat?.name}</label>
+                                    <label className="ml-2 cursor-pointer">{cat?.name}</label>
                                     
                                 </Link>
                             </CommandItem>
