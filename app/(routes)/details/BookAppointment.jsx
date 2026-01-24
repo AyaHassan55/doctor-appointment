@@ -21,10 +21,16 @@ export default function BookAppointment({ doctorDetails }) {
   const [selectedTime, setSelectedTime] = useState(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter()
+  const [openLoginDialog, setOpenLoginDialog] = useState(false);
+
   //  1- book appointment
   const { user } = useKindeBrowserClient();
   //  2- book appointment
   const bookingAppointment = () => {
+     if (!user) {
+    setOpenLoginDialog(true);
+    return;
+  }
     setLoading(true);
     const data = {
       data: {
@@ -117,6 +123,35 @@ export default function BookAppointment({ doctorDetails }) {
             </div>
           </div>
         </div>
+          <Dialog open={openLoginDialog} onOpenChange={setOpenLoginDialog}>
+  <DialogContent className="max-w-md text-center">
+    <DialogHeader>
+      <DialogTitle className="text-xl font-bold text-red-600">
+        Login Required
+      </DialogTitle>
+    </DialogHeader>
+
+    <p className="text-muted-foreground mt-2">
+      You must be logged in to book an appointment.
+    </p>
+
+    <div className="flex justify-center gap-3 mt-6">
+      <Button
+        variant="outline"
+        onClick={() => setOpenLoginDialog(false)}
+      >
+        Cancel
+      </Button>
+
+      <Button
+        onClick={() => router.push('/api/auth/login')}
+        className="bg-primary text-white"
+      >
+        Login
+      </Button>
+    </div>
+  </DialogContent>
+</Dialog>
 
         {/* Footer */}
         <div className="flex justify-end mt-6">

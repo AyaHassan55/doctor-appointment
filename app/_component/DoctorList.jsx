@@ -51,9 +51,7 @@ export default function DoctorList({ doctors, heading = "Popular Doctors" }) {
                             <Link href={`/details/${doctor?.documentId}`} key={index}>
                                 <div className="bg-white rounded-2xl p-5 hover:scale-104 transition-transform duration-500">
                                     {
-                                        // visibleDoctors?.map((doctor, index) => (
-
-                                            <Link href={`/details/${doctor?.documentId}`} key={index}>
+                                      
                                                 <div className='bg-white rounded-2xl p-5  hover:scale-104 transition-transform duration-500'
                                                     style={{ transitionDelay: `${index * 0.1}s` }}>
                                                     <div className='relative mb-4 overflow-hidden rounded-2xl ' >
@@ -64,8 +62,6 @@ export default function DoctorList({ doctors, heading = "Popular Doctors" }) {
                                                             unoptimized
                                                             alt={doctor?.name}
                                                         />
-
-
                                                     </div>
 
                                                     <div>
@@ -98,12 +94,6 @@ export default function DoctorList({ doctors, heading = "Popular Doctors" }) {
                                                     </div>
 
                                                 </div>
-
-                                            </Link>
-
-
-
-                                        // ))
                                     }
                                 </div>
                             </Link>
