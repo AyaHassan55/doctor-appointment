@@ -7,6 +7,7 @@ import DoctorList from "./_component/DoctorList";
 import { useEffect, useState } from "react";
 import Api from "./_utils/Api";
 import FeaturesSection from "./_component/FeatureSection";
+import '../app/_utils/i18n'
 export default function Home() {
   const [doctors, setDoctors] =useState([]);
 

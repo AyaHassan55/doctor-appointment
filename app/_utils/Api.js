@@ -4,7 +4,7 @@ const axiosGlobal = axios.create({
   baseURL: 'http://localhost:1337/api', 
   
   })
-  const getCategory =()=>axiosGlobal.get('/categories?populate=*');
+  const getCategory =(locale = 'en')=>axiosGlobal.get(`/categories?populate=*&locale=${locale}`);
   const getDoctors =()=>axiosGlobal.get('/doctors?populate=*');
   const getDoctorsByCategory =(category)=>axiosGlobal
          .get('/doctors?populate=*&filters[Category][name][$contains]='+category);

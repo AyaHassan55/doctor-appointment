@@ -5,6 +5,8 @@ import Header from "./_component/Header";
 import Footer from "./_component/Footer";
 import { Toaster } from "@/components/ui/sonner"
 
+import './_utils/i18n'
+
 
 const outfit = Outfit({
   
