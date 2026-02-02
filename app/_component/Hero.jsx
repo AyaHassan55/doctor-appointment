@@ -1,8 +1,11 @@
+'use client'
 import { Button } from '@/components/ui/button'
 import React from 'react'
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link'; import { Play, Calendar } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 export default function Hero() {
+    const { t, i18n } = useTranslation();
     return (
         <div>
             <section
@@ -38,20 +41,18 @@ export default function Hero() {
                         <Badge
                             className="mb-6 bg-primary/20 text-primary border-primary/30 hover:bg-primary/30 animate-fade-in px-4 py-2 text-sm font-medium"
                         >
-                            ✨ Trusted by 50,000+ Patients
+                            ✨{t('trustedByPatients')}
                         </Badge>
 
                         {/* Headline */}
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-background mb-6 leading-tight animate-fade-in-up">
-                            Your Health,{' '}
-                            <span className="text-primary">Our Priority</span>
+                            {t("uHealth")},{' '}
+                            <span className="text-primary">{t('ourPriority')}</span>
                         </h1>
 
                         {/* Subheadline */}
                         <p className="text-lg md:text-xl text-background/80 mb-10 max-w-2xl leading-relaxed animate-fade-in-delay-1">
-                            Experience world-class healthcare with our team of expert doctors.
-                            Available 24/7 for consultations, appointments, and emergency care.
-                            Your wellness journey starts here.
+                            {t('heroSection')}
                         </p>
 
                         {/* CTA Buttons */}
@@ -60,12 +61,12 @@ export default function Hero() {
                             <Button className="rounded-2xl w-50 h-15 bg-[#EF6634] hover:scale-105 hover:bg-[#EF6634] transform transition-transform duration-300 text-white shadow-lg" size="xl" asChild>
                                 <Link href="/search/Hematology">
                                     <Calendar className="w-5 h-5 mr-2" />
-                                    Book an Appointment
+                                    {t('bookAppo')}
                                 </Link>
                             </Button>
                             <Button className="rounded-2xl w-50 h-15 bg-white/10 text-white border border-white/30  hover:bg-white/20 backdrop-blur-md cursor-pointer" size="xl">
                                 <Play className="w-5 h-5 mr-2" />
-                                Watch Our Story
+                                {t('watchStory')}
                             </Button>
                         </div>
 
@@ -73,15 +74,15 @@ export default function Hero() {
                         <div className="mt-16 grid grid-cols-3 gap-8 animate-fade-in-delay-3">
                             <div>
                                 <p className="text-3xl md:text-4xl font-bold text-primary">500+</p>
-                                <p className="text-background/70 text-sm mt-1">Expert Doctors</p>
+                                <p className="text-background/70 text-sm mt-1">{t('expertDoctors')}</p>
                             </div>
                             <div>
                                 <p className="text-3xl md:text-4xl font-bold text-primary">50K+</p>
-                                <p className="text-background/70 text-sm mt-1">Happy Patients</p>
+                                <p className="text-background/70 text-sm mt-1">{t('happyPatients')}</p>
                             </div>
                             <div>
                                 <p className="text-3xl md:text-4xl font-bold text-primary">24/7</p>
-                                <p className="text-background/70 text-sm mt-1">Available Care</p>
+                                <p className="text-background/70 text-sm mt-1">{t('availableCare')}</p>
                             </div>
                         </div>
                     </div>
