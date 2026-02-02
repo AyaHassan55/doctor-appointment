@@ -1,20 +1,22 @@
 "use client"
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+
 import React, { useEffect, useState } from 'react'
 import Api from '../_utils/Api';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next'
 
 export default function CategorySearch() {
+    const { i18n } = useTranslation()
+
     const [categoriesList, setCategoriesList] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        getCategoryList();
-    }, [])
-    const getCategoryList = () => {
+        getCategoryList(i18n.language);
+    }, [i18n.language])
+    const getCategoryList = (locale) => {
         setLoading(true)
-        Api.getCategory().then((res) => {
+        Api.getCategory(locale).then((res) => {
             setCategoriesList(res.data.data);
 
             // console.log('ayaaaaaa')
@@ -25,6 +27,8 @@ export default function CategorySearch() {
             setLoading(false);
         });
     }
+
+
     return (
         <div className='flex flex-col mb-10 items-center'>
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 mt-8'>
