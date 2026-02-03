@@ -12,7 +12,7 @@ const axiosGlobal = axios.create({
       
  const getDoctorByID =(documentId, locale = 'en')=>axiosGlobal.get(`/doctors/${documentId}?populate=*&locale=${locale}`);
  const bookAppointment =(data)=>axiosGlobal.post('/appointments',data);
- const myBookingList =(email)=>axiosGlobal.get('/appointments?filters[email][$eq]='+email+'&populate[doctor][populate]=image');
+ const myBookingList =(email)=>axiosGlobal.get(`/appointments?filters[email][$eq]=${email}&populate[doctor][populate]=image&locale=${locale}`);
 const deleteBooking =(documentId)=>axiosGlobal.delete('/appointments/'+documentId)
 export default  {
   getCategory,

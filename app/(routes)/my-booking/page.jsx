@@ -8,18 +8,18 @@ import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs'
 import MyBookingList from './_component/MyBookingList'
 import { useTranslation } from 'react-i18next'
 function MyBooking() {
-  const {t} = useTranslation()
+  const {t, i18n} = useTranslation()
 
   const [bookingList, setBookingList] = useState([]);
   const { user } = useKindeBrowserClient()
   useEffect(() => {
     if (user) {
 
-      userBookingList({ email: user.email })
-    }}, [user])
+      userBookingList({ email: user.email }, i18n.language)
+    }}, [user, i18n.language])
 
-  const userBookingList =()=>{
-    Api.myBookingList(user?.email).then((res)=>{
+  const userBookingList =(email , locale)=>{
+    Api.myBookingList(user?.email , locale).then((res)=>{
       console.log("my booking list",res.data)
       setBookingList(res.data.data)
     }).catch((err)=>{
