@@ -43,13 +43,13 @@ export default function BookAppointment({ doctorDetails }) {
       }
     }
     Api.bookAppointment(data).then((res) => {
-      console.log('Appointment booked successfully:', res.data);
-      toast("Appointment booked successfully.");
+      // console.log('Appointment booked successfully:', res.data);
+      toast(t('ApppSuccess'));
       router.push('/my-booking')
 
     }).catch((err) => {
-      console.log('Error booking appointment:', err);
-      toast.error("Error booking appointment.")
+      // console.log('Error booking appointment:', err);
+      toast.error(t('AppoError'))
     }).finally(() => setLoading(false));
   }
 
