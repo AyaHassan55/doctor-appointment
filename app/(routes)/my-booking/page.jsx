@@ -15,23 +15,23 @@ function MyBooking() {
   useEffect(() => {
     if (user) {
 
-      userBookingList({ email: user.email }, i18n.language)
+      userBookingList( user.email , i18n.language)
     }}, [user, i18n.language])
 
   const userBookingList =(email , locale)=>{
     Api.myBookingList(user?.email , locale).then((res)=>{
-      console.log("my booking list",res.data)
+      // console.log("my booking list",res.data)
       setBookingList(res.data.data)
     }).catch((err)=>{
-      console.log("error in my booking list",err)
+      // console.log("error in my booking list",err)
     })
   }
 
  const filterBookingList = (type) => {
   return bookingList.filter(item => {
     return type === 'upcoming'
-      ? new Date(item.date) >= new Date()
-      : new Date(item.date) < new Date()
+      ? new Date(item.date).getTime()  >= new Date()
+      : new Date(item.date).getTime()  < new Date()
   })
 }
 
@@ -54,7 +54,7 @@ function MyBooking() {
         {/* Tabs Header */}
          <TabsList className="w-full mb-6 grid grid-cols-2">
               <TabsTrigger value="upcoming" className="text-base">
-                {t('upcoming')} ({bookingList.length})
+                {t('upcoming')} ({filterBookingList('upcoming').length})
               </TabsTrigger>
               <TabsTrigger value="past" className="text-base">
                 {t('past')} 
@@ -65,12 +65,12 @@ function MyBooking() {
         {/* Upcoming Content */}
         
         <TabsContent value="upcoming" className="mt-6">
-          <MyBookingList updateAppointment={()=>userBookingList()} past={false} bookingList={filterBookingList('upcoming')} />
+          <MyBookingList updateAppointment={()=>userBookingList(user.email, i18n.language)} past={false} bookingList={filterBookingList('upcoming')} />
         </TabsContent>
 
         {/* Past Content */}
         <TabsContent value="past" className="mt-6">
-          <MyBookingList updateAppointment={()=>userBookingList()} past={true} bookingList={filterBookingList('past')}/>
+          <MyBookingList updateAppointment={()=>userBookingList(user.email, i18n.language)} past={true} bookingList={filterBookingList('past')}/>
         </TabsContent>
       </Tabs>
 

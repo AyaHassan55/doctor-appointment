@@ -5,11 +5,12 @@ import CancelAppointment from './CancelAppointment'
 import Api from '@/app/_utils/Api'
 import { toast } from 'sonner'
 import { CalendarDays, Clock, MapPin } from "lucide-react"
-import { useTranslation } from 'react-i18next' 
+import { useTranslation } from 'react-i18next'
 
 
 export default function MyBookingList({ bookingList, past, updateAppointment }) {
-  const {t}= useTranslation()
+  const { t ,i18n} = useTranslation();
+  const localee = i18n.language === 'ar' ? 'ar-EG' : 'en-US';
   const onDeleteBooking = (item) => {
     Api.deleteBooking(item.documentId).then(() => {
       toast(t('appointCanceled'))
@@ -73,12 +74,26 @@ export default function MyBookingList({ bookingList, past, updateAppointment }) 
               <div className="text-sm text-gray-500 mt-2 space-y-1">
                 <div className="flex items-center justify-center sm:justify-start">
                   <CalendarDays className="w-4 h-4 text-[#138d75]" />
-                  <span>{new Date(item.date).toLocaleDateString()}</span>
+                  <span>
+                    
+                    {new Date(item.date).toLocaleDateString(localee, {
+                      day: 'numeric',
+                      month: 'long',
+                      year: 'numeric',
+                    })}
+
+                  </span>
                 </div>
 
                 <div className="flex items-center justify-center sm:justify-start">
                   <Clock className="w-4 h-4 text-[#138d75]" />
-                  <span>{new Date(item.date).toLocaleTimeString()}</span>
+                  <span>
+                    {new Date(item.date).toLocaleTimeString(localee, {
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+    })}
+                    </span>
                 </div>
 
                 <div className="flex items-center justify-center sm:justify-start">
