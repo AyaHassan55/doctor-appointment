@@ -6,8 +6,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Api from '@/app/_utils/Api'
 import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs'
 import MyBookingList from './_component/MyBookingList'
-
+import { useTranslation } from 'react-i18next'
 function MyBooking() {
+  const {t} = useTranslation()
 
   const [bookingList, setBookingList] = useState([]);
   const { user } = useKindeBrowserClient()
@@ -16,6 +17,7 @@ function MyBooking() {
 
       userBookingList({ email: user.email })
     }}, [user])
+
   const userBookingList =()=>{
     Api.myBookingList(user?.email).then((res)=>{
       console.log("my booking list",res.data)
@@ -39,23 +41,23 @@ function MyBooking() {
       {/* Page Header */}
           <div className="mb-8">
             <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-              My Appointments
+              {t('myAppoint')}
             </h1>
             <p className="text-muted-foreground">
-              Manage your upcoming and past appointments
+              {t('manageAppointment')}
             </p>
           </div>
 
 
 
-      <Tabs defaultValue="upcoming" className="w-full ">
+      <Tabs defaultValue="upcoming" className="md:w-full ">
         {/* Tabs Header */}
          <TabsList className="w-full mb-6 grid grid-cols-2">
               <TabsTrigger value="upcoming" className="text-base">
-                Upcoming ({bookingList.length})
+                {t('upcoming')} ({bookingList.length})
               </TabsTrigger>
               <TabsTrigger value="past" className="text-base">
-                Past 
+                {t('past')} 
               </TabsTrigger>
             </TabsList>
 

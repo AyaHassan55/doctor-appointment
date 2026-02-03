@@ -32,7 +32,18 @@
   "logReqParagraph":"You must be logged in to book an appointment.",
   "login":"Login", 
   "cancel":"Cancel",
-  "confirmAppointment": "Confirm Appointment"
+  "confirmAppointment": "Confirm Appointment",
+  "myAppoint": "My Appointments ",
+  "manageAppointment":" Manage your upcoming and past appointments",
+  "upcoming":"Upcoming",
+  "past":"Past",
+  "continue":"Continue",
+  "areYouSure":"Are you absolutely sure?",
+  "actionCannotBeUnDone":"This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
+  "noBookings":"No Bookings Yet",
+  "noAppointBooked":"You don’t have any appointments booked yet. Start exploring and book your first appointment!",
+  "appointCanceled":"Appointment has been canceled"
 
+  
 
  }

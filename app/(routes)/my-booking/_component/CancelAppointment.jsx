@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import {
     AlertDialog,
     AlertDialogAction,
@@ -12,28 +13,28 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from '@/components/ui/button'
 function CancelAppointment({ cancelClick }) {
+    const {t} = useTranslation()
     return (
         <div>
             <AlertDialog>
                 <AlertDialogTrigger asChild>
                     <Button
                         variant="outline"
-                        className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white rounded-xl px-5 cursor-pointer"
+                        className="flex sm:w-auto sm:mt-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white rounded-xl px-5 cursor-pointer"
                     >
-                        ✕  Cancel
+                        ✕ {t('cancel')}
                     </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                        <AlertDialogTitle>{t('areYouSure')}</AlertDialogTitle>
                         <AlertDialogDescription>
-                            This action cannot be undone. This will permanently delete your account
-                            and remove your data from our servers.
+                            {t('actionCannotBeUnDone')}
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel  >Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={() => cancelClick()}>Continue</AlertDialogAction>
+                        <AlertDialogCancel  >{t('Cancel')}</AlertDialogCancel>
+                        <AlertDialogAction onClick={() => cancelClick()}>{t('Continue')}</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
