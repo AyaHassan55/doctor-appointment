@@ -33,8 +33,8 @@ function CancelAppointment({ cancelClick }) {
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel  >{t('Cancel')}</AlertDialogCancel>
-                        <AlertDialogAction onClick={() => cancelClick()}>{t('Continue')}</AlertDialogAction>
+                        <AlertDialogCancel  >{t('cancel')}</AlertDialogCancel>
+                        <AlertDialogAction onClick={() => cancelClick()}>{t('continue')}</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>

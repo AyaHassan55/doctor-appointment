@@ -99,6 +99,7 @@ export default function Header() {
                 <div className="md:flex items-center gap-4">
 
                     {/* Language Switcher */}
+                    <div className="hidden md:block">
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button className="flex items-center gap-1 px-3 py-1 rounded hover:bg-gray-100 transition hover:cursor-pointer">
@@ -111,6 +112,7 @@ export default function Header() {
                             <DropdownMenuItem onClick={() => changeLanguage('ar')}>العربية</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
+                    </div>
 
                     {/* User Dropdown */}
                     {user ? (
@@ -150,6 +152,14 @@ export default function Header() {
                                     </Link>
                                 </DropdownMenuItem>
 
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem onClick={() => changeLanguage('en')}>
+                                    English
+                                </DropdownMenuItem>
+
+                                <DropdownMenuItem onClick={() => changeLanguage('ar')}>
+                                     العربية
+                                </DropdownMenuItem>
                                 <DropdownMenuSeparator />
 
                                 <DropdownMenuItem className="text-destructive cursor-pointer">

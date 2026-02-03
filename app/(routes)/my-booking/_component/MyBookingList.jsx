@@ -47,7 +47,7 @@ export default function MyBookingList({ bookingList, past, updateAppointment }) 
           {/* Left */}
           <div className="flex flex-col sm:flex-row items-center gap-4 w-full ">
             {/* Image */}
-            <div className="w-40 h-40 sm:w-40 sm:h-40 rounded-xl overflow-hidden bg-gray-200">
+            <div className="w-full h-40 sm:w-40 sm:h-40 rounded-xl overflow-hidden bg-gray-200">
               {item?.doctor?.image?.[0]?.url && (
                 <Image
                   src={`http://localhost:1337${item.doctor.image[0].url}`}
