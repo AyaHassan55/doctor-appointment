@@ -3,16 +3,19 @@ import Api from '@/app/_utils/Api';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from "react-i18next";
 
 export default function DoctorSuggition() {
+    const {t, i18n} = useTranslation();
     const [doctors, setDoctors] = useState([]);
     const [loading,setLoading] = useState(true);
     useEffect(()=>{
-        getDocotorsSuggition();
-    },[])
-    const getDocotorsSuggition =()=>{
+        getDocotorsSuggition(i18n.language);
+    },[i18n.language])
+
+    const getDocotorsSuggition =(locale)=>{
         setLoading(true);
-       Api.getDoctors().then((res)=>{
+       Api.getDoctors(locale).then((res)=>{
         setDoctors(res.data.data);
        }).catch((err)=>{
         console.log(err);
@@ -22,7 +25,7 @@ return (
   <div className="bg-muted/30 rounded-2xl p-6 h-fit sticky top-8">
     <h2 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
       <span className="w-1 h-6 bg-primary rounded-full"></span>
-      Suggestions
+      {t('suggition')}
     </h2>
 
     {loading ? (
@@ -80,7 +83,7 @@ return (
     ) : (
       //  Empty State
       <p className="text-sm text-muted-foreground text-center">
-        No suggestions available
+         {t('noSuggition')}
       </p>
     )}
   </div>

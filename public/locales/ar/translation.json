@@ -14,6 +14,24 @@
    "watchStory":"شاهد قصتنا",
     "expertDoctors":"الأطباء الخبراء",
    "happyPatients":"المرضى السعداء",
-   "availableCare":"الرعاية المتاحة"
+   "availableCare":"الرعاية المتاحة",
+   "expertCare":"رعاية الخبراء",
+   "meetOurDoctors":"تعرف على أطبائنا",
+   "docsParagraph":"كوادر طبية مؤهلة وذات خبرة عالية، ملتزمة بتقديم رعاية استثنائية للمرضى.",
+   "docDetails":"تفاصيل الدكتور",
+   "reviews":"المراجعات",
+   "yOExperience":"سنين خبرة",
+   "years":"سنين",
+    "experience":"خبرة",
+   "bookNow":"احجز الآن",
+   "suggition":"الاقتراحات",
+   "noSuggition":"لا توجد اقتراحات متاحة",
+   "bookAppointment":"حجز موعد",
+  "availableTime":"الوقت المتاح",
+  "logReq":"تسجيل الدخول مطلوب",
+  "logReqParagraph":"يجب عليك تسجيل الدخول لحجز موعد.",
+  "login":"تسجيل الدخول ", 
+  "cancel":"الغاء",
+ "confirmAppointment":"تأكيد الموعد"
 
 }

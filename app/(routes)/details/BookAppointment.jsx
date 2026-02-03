@@ -15,6 +15,7 @@ import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs'
 import Api from '@/app/_utils/Api'
 import { toast } from "sonner"
 import { useRouter } from 'next/navigation'
+import { useTranslation } from "react-i18next";
 export default function BookAppointment({ doctorDetails }) {
   const [date, setDate] = useState(new Date())
   const [timeSlots, setTimeSlots] = useState([])
@@ -22,7 +23,7 @@ export default function BookAppointment({ doctorDetails }) {
   const [loading, setLoading] = useState(false);
   const router = useRouter()
   const [openLoginDialog, setOpenLoginDialog] = useState(false);
-
+  const {t,i18n} = useTranslation()
   //  1- book appointment
   const { user } = useKindeBrowserClient();
   //  2- book appointment
@@ -77,18 +78,18 @@ export default function BookAppointment({ doctorDetails }) {
     <Dialog>
       <DialogTrigger asChild>
         <Button className="mt-3 rounded-full cursor-pointer ">
-          Book Appointment
+          {t('bookAppointment')}
         </Button>
       </DialogTrigger>
 
       <DialogContent className="max-w-3xl p-6">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold">
-            Book Appointment
+           {t('bookAppointment')}
           </DialogTitle>
         </DialogHeader>
 
-        <div className="grid grid-cols-2 gap-6 mt-4">
+        <div className="grid grig-cols-1 md:grid-cols-2 gap-6 mt-4">
 
           {/* Calendar */}
           <div className=" ">
@@ -103,9 +104,9 @@ export default function BookAppointment({ doctorDetails }) {
 
           {/* Time slots */}
           <div className=''>
-            <h3 className="font-semibold mb-3 text-center">Available Time</h3>
+            <h3 className="font-semibold mb-3 text-center">{t('availableTime')}</h3>
 
-            <div className="grid grid-cols-3 gap-3 max-h-75 overflow-y-auto pr-2">
+            <div className="grid grid-cols-2 gap-3 max-h-75 overflow-y-auto pr-2">
               {timeSlots.map((time, index) => (
                 <button
                   key={index}
@@ -127,12 +128,12 @@ export default function BookAppointment({ doctorDetails }) {
   <DialogContent className="max-w-md text-center">
     <DialogHeader>
       <DialogTitle className="text-xl font-bold text-red-600">
-        Login Required
+        {t('logReq')}
       </DialogTitle>
     </DialogHeader>
 
     <p className="text-muted-foreground mt-2">
-      You must be logged in to book an appointment.
+      {t('logReqParagraph')}
     </p>
 
     <div className="flex justify-center gap-3 mt-6">
@@ -140,14 +141,14 @@ export default function BookAppointment({ doctorDetails }) {
         variant="outline"
         onClick={() => setOpenLoginDialog(false)}
       >
-        Cancel
+        {t('cancel')}
       </Button>
 
       <Button
         onClick={() => router.push('/api/auth/login')}
         className="bg-primary text-white"
       >
-        Login
+        {t('login')}
       </Button>
     </div>
   </DialogContent>
@@ -182,7 +183,7 @@ export default function BookAppointment({ doctorDetails }) {
                 ></path>
               </svg>
             ) : (
-              "Confirm Appointment"
+             t('confirmAppointment')
             )}
 
           </Button>

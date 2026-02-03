@@ -5,12 +5,12 @@ const axiosGlobal = axios.create({
   
   })
   const getCategory =(locale = 'en')=>axiosGlobal.get(`/categories?populate=*&locale=${locale}`);
-  const getDoctors =()=>axiosGlobal.get('/doctors?populate=*');
-  const getDoctorsByCategory =(category)=>axiosGlobal
-         .get('/doctors?populate=*&filters[Category][name][$contains]='+category);
+  const getDoctors =(locale='en')=>axiosGlobal.get(`/doctors?populate=*&locale=${locale}`);
+  const getDoctorsByCategory =(category, locale = 'en')=>axiosGlobal
+         .get(`/doctors?populate=*&filters[Category][name][$contains]=${category}&locale=${locale}`);
 
-//  const getDoctorByID =(documentId)=>axiosGlobal.get(`/doctors/${documentId}?populate=*`);        
- const getDoctorByID =(documentId)=>axiosGlobal.get('/doctors/'+documentId+'?populate=*');
+      
+ const getDoctorByID =(documentId, locale = 'en')=>axiosGlobal.get(`/doctors/${documentId}?populate=*&locale=${locale}`);
  const bookAppointment =(data)=>axiosGlobal.post('/appointments',data);
  const myBookingList =(email)=>axiosGlobal.get('/appointments?filters[email][$eq]='+email+'&populate[doctor][populate]=image');
 const deleteBooking =(documentId)=>axiosGlobal.delete('/appointments/'+documentId)

@@ -7,16 +7,19 @@ import DoctorList from "./_component/DoctorList";
 import { useEffect, useState } from "react";
 import Api from "./_utils/Api";
 import FeaturesSection from "./_component/FeatureSection";
+import { useTranslation } from "react-i18next";
+
 import '../app/_utils/i18n'
 export default function Home() {
   const [doctors, setDoctors] =useState([]);
 
+   const { i18n } = useTranslation();
   useEffect(()=>{
-     getDoctorsList();
+     getDoctorsList(i18n.language);
      
-  },[])
-  const getDoctorsList=()=>{
-    Api.getDoctors().then(res=>{
+  },[i18n.language])
+  const getDoctorsList=(locale)=>{
+    Api.getDoctors(locale).then(res=>{
       console.log('doctors',res.data.data);
       setDoctors(res.data.data);
     })

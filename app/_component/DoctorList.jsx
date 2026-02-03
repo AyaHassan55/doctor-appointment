@@ -5,9 +5,14 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Star, MapPin, Clock, ArrowDown } from 'lucide-react';
 import DoctorSkeleton from './_doctorSkelton';
+import { useTranslation } from 'react-i18next'
+
 export default function DoctorList({ doctors, heading = "Popular Doctors" }) {
     const [showAll, setShowAll] = useState(false);
     const visibleDoctors = showAll ? doctors : doctors.slice(0, 4);
+    const { t } = useTranslation()
+
+
     return (
         <section className='py-20 bg-muted '>
             <div className=' mx-auto px-4'>
@@ -15,14 +20,13 @@ export default function DoctorList({ doctors, heading = "Popular Doctors" }) {
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 m-4">
                     <div>
                         <span className="text-primary font-semibold text-sm uppercase tracking-wider">
-                            Expert Care
+                            {t('expertCare')}
                         </span>
                         <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
-                            Meet Our Doctors
+                            {t('meetOurDoctors')}
                         </h2>
                         <p className="text-muted-foreground max-w-xl">
-                            Highly qualified and experienced medical professionals dedicated to providing
-                            exceptional patient care.
+                            {t('docsParagraph')}
                         </p>
                     </div>
                     {/* Arrow */}
@@ -68,7 +72,7 @@ export default function DoctorList({ doctors, heading = "Popular Doctors" }) {
                                                 <div className="flex items-center gap-1 mb-2">
                                                     <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
                                                     <span className="text-sm font-medium text-foreground">{doctor.rating}</span>
-                                                    <span className="text-sm text-muted-foreground">({doctor?.reviews} reviews)</span>
+                                                    <span className="text-sm text-muted-foreground">({doctor?.reviews} {t('reviews')})</span>
                                                 </div>
 
                                                 <h3 className="font-semibold text-lg text-foreground mb-1 group-hover:text-primary transition-colors">
@@ -79,7 +83,7 @@ export default function DoctorList({ doctors, heading = "Popular Doctors" }) {
                                                 <div className="space-y-2 mb-4">
                                                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                                                         <Clock className="w-4 h-4" />
-                                                        <span>{doctor?.year_of_experience} years experience</span>
+                                                        <span>{doctor?.year_of_experience} {t('yOExperience')}</span>
                                                     </div>
                                                     <div className="flex items-start gap-2 text-sm text-muted-foreground">
                                                         <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
@@ -88,7 +92,7 @@ export default function DoctorList({ doctors, heading = "Popular Doctors" }) {
                                                 </div>
 
                                                 <div className="w-full text-center bg-primary text-white py-2 rounded-md font-medium mt-3 hover:bg-primary/90 transition">
-                                                    Book Now
+                                                    {t('bookNow')}
                                                 </div>
 
                                             </div>

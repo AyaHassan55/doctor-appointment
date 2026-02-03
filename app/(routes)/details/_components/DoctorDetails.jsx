@@ -5,9 +5,9 @@ import Image from 'next/image'
 import { GraduationCap, MapPin, Clock, Star } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import BookAppointment from '../BookAppointment'
-
+import { useTranslation } from "react-i18next";
 export default function DoctorDetails({ doctorDetails}) {
-
+ const {t,i18n} = useTranslation()
     return (
         <>
            
@@ -54,8 +54,8 @@ export default function DoctorDetails({ doctorDetails}) {
                                         <div className="p-2 bg-secondary rounded-lg">
                                             <Clock className="w-5 h-5 text-primary" />
                                         </div>
-                                        <span className="text-sm font-semibold text-foreground">{doctorDetails?.year_of_experience}+ Years</span>
-                                        <span className="text-sm">Experience</span>
+                                        <span className="text-sm font-semibold text-foreground">{doctorDetails?.year_of_experience}{t('years')}</span>
+                                        <span className="text-sm">{t('experience')}</span>
                                     </div>
                                 </div>
 
